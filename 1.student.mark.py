@@ -27,6 +27,7 @@ def list_student():
 
 for n in range(0, NumOfCourse):
     Input_Course_Infor(Infor=Course_Infor)
+    
 print("{:3} |{:12}".format("ID", "name"))
 for key in Course_Infor:
     print("{:3} |{:12}".format(key, Course_Infor[key][0]))
