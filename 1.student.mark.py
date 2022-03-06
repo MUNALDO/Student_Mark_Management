@@ -1,5 +1,6 @@
-Course_Infor = {}
+course_info = {}
 student_info = {}
+course_with_mark = {}
 end = False
 
 def Input_Course_Infor(Infor):
@@ -25,8 +26,18 @@ def list_student():
 
 def list_course():
     print("{:3} | {:12}".format("ID", "name"))
-    for key in Course_Infor:
-        print("{:3} | {:12}".format(key, Course_Infor[key][0]))
+    for key in course_info:
+        print("{:3} | {:12}".format(key, course_info[key][0]))
+
+
+def add_mark_to_course():
+    course_with_mark = course_info
+
+
+def is_empty(dict):
+    if len(dict) == 0:
+        return True
+    return False
 
 
 print("Welcome To Student Management Program!")
@@ -47,11 +58,19 @@ while not end:
     elif choice == 2:
         NumOfCourse = int(input("Enter number of course : "))
         for n in range(0, NumOfCourse):
-            Input_Course_Infor(Infor=Course_Infor)
+            Input_Course_Infor(Infor=course_info)
     elif choice == 3:
-        list_student()
+        empty = is_empty(student_info)
+        if not empty:
+            list_student()
+        else:
+            print("There are no students in class!")
     elif choice == 4:
-        list_course()
+        empty = is_empty(course_info)
+        if not empty:
+            list_course()
+        else:
+            print("There are no courses!")
     elif choice == 5:
     elif choice == 6:
     elif choice == 0:
