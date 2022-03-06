@@ -3,19 +3,36 @@ student_info = {}
 course_with_mark = {}
 end = False
 
-def Input_Course_Infor(Infor):
-    id = int(input("Enter course ID : "))
-    name = input("Enter course name : ")
-    course = [name]
-    Infor[id] = course
+
+def input_course_info(info):
+    num_of_course = input("Enter number of course : ")
+    num = int(num_of_course)
+    while num > 0:
+        id = input("Enter course ID : ")
+        if not is_exist(info, id):
+            name = input("Enter course name : ")
+            course = [name]
+            info[id] = course
+            num = num - 1
+        else:
+            print(f"This id existed.")
+    print(f"Add {num_of_course} courses success.")
 
 
 def input_student_info(info):
-    id = input("Input student's ID: ")
-    name = input("Input student's name: ")
-    dob = input("Input student's date of birth (dd/mm/yyyy): ")
-    student = [name, dob]
-    info[id] = student
+    num_student = input("Input number of students: ")
+    num = int(num_student)
+    while num > 0:
+        id = input("Input student's ID: ")
+        if not is_exist(info, id):
+            name = input("Input student's name: ")
+            dob = input("Input student's date of birth (dd/mm/yyyy): ")
+            student = [name, dob]
+            info[id] = student
+            num = num - 1
+        else:
+            print(f"This id existed.")
+    print(f"Add {num_student} students success.")
 
 
 def list_student():
@@ -25,17 +42,38 @@ def list_student():
 
 
 def list_course():
-    print("{:3} | {:12}".format("ID", "name"))
+    print("{:10} | {:12}".format("ID", "Name"))
     for key in course_info:
-        print("{:3} | {:12}".format(key, course_info[key][0]))
+        print("{:10} | {:12}".format(key, course_info[key][0]))
 
 
-def add_mark_to_course():
-    course_with_mark = course_info
+def list_course_with_mark():
+    print("{:10} | {:20} | {:20}".format("ID", "Name", "Mark"))
+    for key in course_with_mark:
+        print("{:10} | {:20} | {:20}".format(key, course_with_mark[key][0], course_with_mark[key][1]))
 
 
-def is_empty(dict):
-    if len(dict) == 0:
+def add_mark_to_course(course_mark, student, course):
+    input_course = input("Input a course's ID wanted to add marks: ")
+    for k_e_y in course:
+        if k_e_y == input_course:
+            course_mark[input_course] = []
+            for key in student:
+                student_mark = input(f"Input {key} / {student[key][0]} mark: ")
+                course_mark[input_course].append([student[key][0], student_mark])
+            break
+        if k_e_y not in course:
+            print("Invalid course name!")
+
+
+def is_empty(dictionary):
+    if len(dictionary) == 0:
+        return True
+    return False
+
+
+def is_exist(dictionary, id):
+    if id in dictionary:
         return True
     return False
 
@@ -50,30 +88,32 @@ while not end:
     print("[5] Add student's marks to a course")
     print("[6] Show a course with marks")
     print("[0] Exit")
-    choice = int(input("Please choose an option: "))
-    if choice == 1:
-        num_student = int(input("Input number of students: "))
-        for i in range(0, num_student):
-            input_student_info(info=student_info)
-    elif choice == 2:
-        NumOfCourse = int(input("Enter number of course : "))
-        for n in range(0, NumOfCourse):
-            Input_Course_Infor(Infor=course_info)
-    elif choice == 3:
+    choice = input("Please choose an option: ")
+    if choice == "1":
+        input_student_info(info=student_info)
+    elif choice == "2":
+        input_course_info(info=course_info)
+    elif choice == "3":
         empty = is_empty(student_info)
         if not empty:
             list_student()
         else:
             print("There are no students in class!")
-    elif choice == 4:
+    elif choice == "4":
         empty = is_empty(course_info)
         if not empty:
             list_course()
         else:
             print("There are no courses!")
-    elif choice == 5:
-    elif choice == 6:
-    elif choice == 0:
+    elif choice == "5":
+        add_mark_to_course(course_with_mark, student_info, course_info)
+    elif choice == "6":
+        empty = is_empty(course_with_mark)
+        if not empty:
+            list_course_with_mark()
+        else:
+            print("There are no courses have mark!")
+    elif choice == "0":
         end = True
     else:
         print(f"{choice} is an invalid input!")
