@@ -48,9 +48,12 @@ def list_course():
 
 
 def list_course_with_mark():
-    print("{:10} | {:20} | {:20}".format("ID", "Name", "Mark"))
+    i = 0
+    print("{:10} | {:20} | {:10}".format("ID", "Name", "Mark"))
     for key in course_with_mark:
-        print("{:10} | {:20} | {:20}".format(key, course_with_mark[key][0], course_with_mark[key][1]))
+        name = str(course_with_mark[key][i][i])
+        mark = str(course_with_mark[key][i][i + 1])
+        print("{:10} | {:20} | {:10}".format(key, name, mark))
 
 
 def add_mark_to_course(course_mark, student, course):
@@ -59,7 +62,7 @@ def add_mark_to_course(course_mark, student, course):
         if k_e_y == input_course:
             course_mark[input_course] = []
             for key in student:
-                student_mark = input(f"Input {key} / {student[key][0]} mark: ")
+                student_mark = input(f"Input student {key} / {student[key][0]}'s mark: ")
                 course_mark[input_course].append([student[key][0], student_mark])
             break
         if k_e_y not in course:
