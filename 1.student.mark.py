@@ -1,14 +1,12 @@
 Course_Infor = {}
 student_info = {}
-NumOfCourse = int(input("Enter number of course : "))
-num_student = int(input("Input number of students: "))
-
+end = False
 
 def Input_Course_Infor(Infor):
-    ID = int(input("Enter course ID : "))
+    id = int(input("Enter course ID : "))
     name = input("Enter course name : ")
-    Course = [name]
-    Infor[ID] = Course
+    course = [name]
+    Infor[id] = course
 
 
 def input_student_info(info):
@@ -26,15 +24,37 @@ def list_student():
 
 
 def list_course():
-    print("{:3} |{:12}".format("ID", "name"))
+    print("{:3} | {:12}".format("ID", "name"))
     for key in Course_Infor:
-        print("{:3} |{:12}".format(key, Course_Infor[key][0]))
+        print("{:3} | {:12}".format(key, Course_Infor[key][0]))
 
 
-for n in range(0, NumOfCourse):
-    Input_Course_Infor(Infor=Course_Infor)
-list_course()
-
-for i in range(0, num_student):
-    input_student_info(info=student_info)
-list_student()
+print("Welcome To Student Management Program!")
+while not end:
+    print("-----------menu----------")
+    print("[1] Add Students")
+    print("[2] Add Courses")
+    print("[3] Show list of students")
+    print("[4] Show list of courses")
+    print("[5] Add student's marks to a course")
+    print("[6] Show a course with marks")
+    print("[0] Exit")
+    choice = int(input("Please choose an option: "))
+    if choice == 1:
+        num_student = int(input("Input number of students: "))
+        for i in range(0, num_student):
+            input_student_info(info=student_info)
+    elif choice == 2:
+        NumOfCourse = int(input("Enter number of course : "))
+        for n in range(0, NumOfCourse):
+            Input_Course_Infor(Infor=Course_Infor)
+    elif choice == 3:
+        list_student()
+    elif choice == 4:
+        list_course()
+    elif choice == 5:
+    elif choice == 6:
+    elif choice == 0:
+        end = True
+    else:
+        print(f"{choice} is an invalid input!")
