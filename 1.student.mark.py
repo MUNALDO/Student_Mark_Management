@@ -25,13 +25,16 @@ def list_student():
         print("{:10} | {:20} | {:20}".format(key, student_info[key][0], student_info[key][1]))
 
 
+def list_course():
+    print("{:3} |{:12}".format("ID", "name"))
+    for key in Course_Infor:
+        print("{:3} |{:12}".format(key, Course_Infor[key][0]))
+
+
 for n in range(0, NumOfCourse):
     Input_Course_Infor(Infor=Course_Infor)
-    
-print("{:3} |{:12}".format("ID", "name"))
-for key in Course_Infor:
-    print("{:3} |{:12}".format(key, Course_Infor[key][0]))
+list_course()
 
 for i in range(0, num_student):
     input_student_info(info=student_info)
-    list_student()
+list_student()
